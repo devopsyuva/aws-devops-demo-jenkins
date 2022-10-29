@@ -8,17 +8,25 @@ pipeline {
     }
     stages {
         stage('Initialize Terraform') {
-            sh 'terraform init'
+            steps {
+                sh 'terraform init'
+            }
         }
         stage('Format config files') {
-            sh 'terraform fmt -check=0 || exit 1'
+            steps {
+                sh 'terraform fmt -check=0 || exit 1'
+            }
         }
         stage('Validate config files') {
-            sh 'terraform validate'
+            steps {
+                sh 'terraform validate'
+            }
         }
         stage('Generate Plan') {
-            sh 'terraform plan -out=terraformplan'
-            sh 'terraform show -json ./terraformplan > terraform_plan.json'
+            steps {
+                sh 'terraform plan -out=terraformplan'
+                sh 'terraform show -json ./terraformplan > terraform_plan.json'
+            }
         }
         stage('Publish artifacts for terraform plan') {
             steps {
