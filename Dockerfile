@@ -3,5 +3,6 @@ MAINTAINER "sudheer <sudheer@gmail.com>"
 ENV MYSQL_USER=admin
 RUN apt update && \
     apt install -y nginx curl
+#Provide Port for application to listen
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
