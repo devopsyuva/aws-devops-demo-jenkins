@@ -43,16 +43,12 @@ pipeline {
         }
         stage('Terraform apply') { 
             steps {
-                if (env.selected_action == "apply") {
-                    step {
+                script {
+                    if (env.selected_action == "apply") {
                         sh 'terraform apply -auto-approve'
-                    }
-                } else if (env.selected_action == "destroy") {
-                    step {
+                    } else if (env.selected_action == "destroy") {
                         sh 'terraform destroy -auto-approve'
-                    }
-                } else {
-                    step {
+                    } else {
                         echo 'No need to create a resource as of now,so aborted!!!'
                     }
                 }
